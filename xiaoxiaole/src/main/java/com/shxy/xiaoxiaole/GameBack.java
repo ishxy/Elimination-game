@@ -151,13 +151,13 @@ public class GameBack extends RelativeLayout implements View.OnClickListener {
             for (int j = 0; j < maxLine; j++) {
                 int pos = getRadomInteger();
                 mInfos[i][j] = new Info();
-                mInfos[i][j].imageType = xx[i][j];
-                // mInfos[i][j].imageType = pos;
+                //mInfos[i][j].imageType = xx[i][j];
+                mInfos[i][j].imageType = pos;
                 RelativeLayout.LayoutParams lp = new LayoutParams(width, width);
                 ImageView img = new ImageView(getContext());
                 img.setScaleType(ImageView.ScaleType.FIT_XY);
-                img.setImageBitmap(mAllBitmaps[xx[i][j]]);
-                //img.setImageBitmap(mAllBitmaps[pos]);
+                //img.setImageBitmap(mAllBitmaps[xx[i][j]]);
+                img.setImageBitmap(mAllBitmaps[pos]);
                 img.setId(i * maxLine + j + 1);
                 img.setOnClickListener(this);
                 img.setTag(new Point(i, j));
@@ -359,9 +359,7 @@ public class GameBack extends RelativeLayout implements View.OnClickListener {
     }
 
     private void changeTowViewInfo() {
-        /**
-         * 出现过错误
-         */
+
         Point p1 = (Point) mFirstView.getTag();
         Point p2 = (Point) mSecondView.getTag();
         Info temp = mInfos[p1.x][p1.y];
@@ -432,7 +430,6 @@ public class GameBack extends RelativeLayout implements View.OnClickListener {
 
     /**
      * 设置并启动动画
-     * 重点检查
      */
     private void setAndStartAnimation() {
         nowAnimation = 0;
@@ -487,9 +484,6 @@ public class GameBack extends RelativeLayout implements View.OnClickListener {
                 if (info.needChange) {
 
                     img.setVisibility(VISIBLE);
-                    /**
-                     * 该行多次调用后出现问题
-                     */
                     img.setImageBitmap(mAllBitmaps[mInfos[i][j].tempType]);
                     reset(info);
                 }
